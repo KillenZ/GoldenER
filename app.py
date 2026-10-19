@@ -12,7 +12,7 @@ import copy
 # 1. FULL-SCREEN APP CONFIG & ANIMATED CSS
 # =====================================================================
 st.set_page_config(
-    page_title="GoldenHour CAD v2.7",
+    page_title="VitalPath",
     page_icon="🚑",
     layout="wide",
     initial_sidebar_state="expanded"
