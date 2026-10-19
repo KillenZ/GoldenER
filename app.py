@@ -121,7 +121,7 @@ if not st.session_state.app_started:
     with col_center:
         st.markdown('<div class="animated-splash">', unsafe_allow_html=True)
         with st.container(border=True):
-            st.markdown("<h1 style='text-align: center; color: #f87171;'>🚑 GoldenHour ER Router</h1>", unsafe_allow_html=True)
+            st.markdown("<h1 style='text-align: center; color: #f87171;'>🚑 VitalPath</h1>", unsafe_allow_html=True)
             st.markdown("<h4 style='text-align: center; color: #94a3b8;'>Live City Triage & Smart Ambulance Dispatch OS</h4>", unsafe_allow_html=True)
             st.markdown("---")
             st.markdown("""
