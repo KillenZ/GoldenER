@@ -157,7 +157,7 @@ def calculate_eta_minutes(distance_km, traffic_factor):
 def get_street_route(lat1, lon1, lat2, lon2):
     try:
         url = f"http://router.project-osrm.org/route/v1/driving/{lon1},{lat1};{lon2},{lat2}?overview=full&geometries=geojson"
-        req = urllib.request.Request(url, headers={'User-Agent': 'GoldenHourApp/1.0'})
+        req = urllib.request.Request(url, headers={'User-Agent': 'VitalPathApp/1.0'})
         with urllib.request.urlopen(req, timeout=2.0) as response:
             data = json.loads(response.read().decode())
             coords = data["routes"][0]["geometry"]["coordinates"]
@@ -175,7 +175,7 @@ def open_dispatch_modal(amb_id, patient_condition, hospital, need_icu, need_vent
     
     col1, col2 = st.columns(2)
     col1.metric("Estimated Arrival", f"{hospital['eta_mins']} Mins", f"{hospital['distance_km']} km via Green Corridor")
-    col2.metric("Transfer Time Saved", f"{time_saved} Mins", "Golden Hour Protected")
+    col2.metric("Transfer Time Saved", f"{time_saved} Mins", "VitalPath Protected")
 
     st.markdown("**Resources to Lock at Destination ER:**")
     st.write(f"- 🛏️ **ICU Bed:** {'Yes (1 Bed Reserved)' if need_icu else 'Not Required'}")
@@ -203,7 +203,7 @@ def open_dispatch_modal(amb_id, patient_condition, hospital, need_icu, need_vent
 # 6. SIDEBAR NAVIGATION
 # =====================================================================
 with st.sidebar:
-    st.markdown("### ⚡ **GoldenHour CAD OS**")
+    st.markdown("### ⚡ **VitalPath CAD OS**")
     st.caption("Sector: Shastri Park & North-East Delhi")
     st.markdown("---")
     
@@ -239,7 +239,7 @@ with st.sidebar:
 st.markdown(f"""
 <div class="app-topbar">
     <div>
-        <strong style="font-size: 18px; color: white;">🚑 GOLDENHOUR ER ROUTER</strong>
+        <strong style="font-size: 18px; color: white;">🚑 VitalPath </strong>
         <span style="color: #64748b; margin-left: 10px; font-size: 13px;">CAD 112 DISPATCH SYSTEM</span>
     </div>
     <div>
@@ -338,7 +338,7 @@ if app_screen.startswith("🛰️"):
 
             if optimal_hospital:
                 opt_coords = get_street_route(amb_lat, amb_lon, optimal_hospital["lat"], optimal_hospital["lon"])
-                folium.PolyLine(opt_coords, color="#10b981", weight=6, tooltip="✅ GoldenHour Street Route").add_to(m)
+                folium.PolyLine(opt_coords, color="#10b981", weight=6, tooltip="✅ VitalPath Street Route").add_to(m)
 
             st_folium(m, width=650, height=440, returned_objects=[])
 
@@ -352,7 +352,7 @@ if app_screen.startswith("🛰️"):
                     st.success("**DIRECT ROUTE:** Closest ER is ready!")
 
                 st.metric("🎯 Recommended ER", optimal_hospital["name"][:24], f"{optimal_hospital['eta_mins']} mins ETA ({optimal_hospital['distance_km']} km)")
-                st.metric("⏱️ Golden Hour Saved", f"{time_saved} Minutes", "Avoids 40m ICU Transfer Delay" if time_saved > 0 else "No Diversion Needed")
+                st.metric("⏱️ VitalPath Time Saved", f"{time_saved} Minutes", "Avoids 40m ICU Transfer Delay" if time_saved > 0 else "No Diversion Needed")
 
                 st.markdown("---")
                 st.caption(f"**Target Stock:** 🛏️ {optimal_hospital['icu_beds']} ICU  |  🫁 {optimal_hospital['ventilators']} Vent")
